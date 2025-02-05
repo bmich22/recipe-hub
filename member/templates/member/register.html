@@ -8,7 +8,7 @@
 <body>
     <h1>Hello World!</h1>
     <p>Register here to share recipes on our site.</p>
-    <form action="member/register/" method="post">
+    <form action="/member/register/" method="post">
         {% csrf_token %}
         {{ form }}
         <button>Submit</button>
