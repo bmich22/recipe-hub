@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, logout
 
 
 def register_view(request):
@@ -12,7 +13,7 @@ def register_view(request):
             # information about new user is saved
             form.save()
             # send user back to recipe list page
-            return redirect("/recipes/")
+            return redirect("recipe:list")
     else:
         # if form is not submitted
         form = UserCreationForm()
@@ -25,7 +26,12 @@ def login_view(request):
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             # login here
-            return redirect("/recipes/")
+            return redirect("recipe:list")
     else:
         form = AuthenticationForm()
     return render(request, "member/login.html", {"form": form})
+
+def logout_view(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect("/recipes/")
