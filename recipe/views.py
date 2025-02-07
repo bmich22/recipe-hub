@@ -8,9 +8,11 @@ from .models import Recipe, Ingredient
 #     return HttpResponse("Here is the best recipe of all time!")
 
 
-def RecipeList(request):
-    return render(request, 'recipe/recipe_list.html')
+# def RecipeList(request):
+#     return render(request, 'recipe/recipe_list.html')
 
+class RecipeList(generic.ListView):
+    model = Recipe
 
 
 def add_recipe(request):
