@@ -1,15 +1,25 @@
 <!-- {% load static %} -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>Add Recipe</title>
+    <!-- {{ form.media }}  Required if using widgets like Summernote -->
 </head>
 <body>
     <h2>Add a New Recipe</h2>
     <form method="POST">
         {% csrf_token %}
+        
+        <h3>Recipe Details</h3>
         {{ form.as_p }}
-        <button type="submit">Submit</button>
+
+        <h3>Ingredients</h3>
+        {{ formset.management_form }}  <!-- Required for formsets -->
+        {% for form in formset %}
+            {{ form.as_p }}
+        {% endfor %}
+
+        <button type="submit">Save Recipe</button>
     </form>
 </body>
 </html>

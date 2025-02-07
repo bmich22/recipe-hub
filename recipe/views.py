@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import RecipeForm
+from .forms import RecipeForm, IngredientFormSet
+from .models import Recipe, Ingredient
 
 # Create your views here.
 # def my_recipe(request):
@@ -13,11 +14,18 @@ def recipe_list(request):
 def add_recipe(request):
     if request.method == "POST":
         form = RecipeForm(request.POST)
-        if form.is_valid():
-            recipe = form.save(commit=False)
-            recipe.created_by = request.user  # Assign logged-in member
-            recipe.save()
-            return redirect("recipe:list")  # Redirect to recipe list
+        formset = IngredientFormSet(request.POST)
+
+        if form.is_valid() and formset.is_valid():
+            recipe = form.save()  # Save the Recipe
+            ingredients = formset.save(commit=False)  # Get ingredients but don't save yet
+            for ingredient in ingredients:
+                ingredient.recipe = recipe  # Assign the recipe to each ingredient
+                ingredient.save()  # Save each ingredient
+            return redirect('recipe_list')  # Redirect to the recipe list page
+
     else:
         form = RecipeForm()
-    return render(request, 'recipe/add_recipe.html', {'form': form})
+        formset = IngredientFormSet()
+
+    return render(request, 'recipe/add_recipe.html', {'form': form, 'formset': formset})
