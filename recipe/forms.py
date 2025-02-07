@@ -6,7 +6,7 @@ from .models import Recipe, Ingredient
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = ['title', 'author', 'servings']
+        fields = ['title', 'author', 'servings', 'status']
 
 # Create an inline formset for Ingredients within Recipe
 IngredientFormSet = inlineformset_factory(Recipe, Ingredient, 

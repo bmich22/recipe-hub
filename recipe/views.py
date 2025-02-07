@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views import generic
 from .forms import RecipeForm, IngredientFormSet
 from .models import Recipe, Ingredient
 
@@ -7,8 +8,9 @@ from .models import Recipe, Ingredient
 #     return HttpResponse("Here is the best recipe of all time!")
 
 
-def recipe_list(request):
+def RecipeList(request):
     return render(request, 'recipe/recipe_list.html')
+
 
 
 def add_recipe(request):
