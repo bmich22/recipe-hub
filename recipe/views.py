@@ -12,7 +12,9 @@ from .models import Recipe, Ingredient
 #     return render(request, 'recipe/recipe_list.html')
 
 class RecipeList(generic.ListView):
-    model = Recipe
+    # model = Recipe
+    queryset = Recipe.objects.all()
+    template_name = "recipe_list.html"
 
 
 def add_recipe(request):
