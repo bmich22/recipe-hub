@@ -8,6 +8,7 @@ class RecipeForm(forms.ModelForm):
         model = Recipe
         fields = ['title', 'author', 'servings', 'status']
 
+
 # Create an inline formset for Ingredients within Recipe
 IngredientFormSet = inlineformset_factory(Recipe, Ingredient, 
                                           fields=['amount', 'unit', 'name'], 

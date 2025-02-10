@@ -17,7 +17,7 @@ class InstructionInline(admin.TabularInline):  # or admin.StackedInline for a di
 # ✅ Step 2: Register RecipeAdmin with the inline Ingredient form
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug')
+    list_display = ('title', 'slug', 'status', 'created_on')
     prepopulated_fields = {'slug': ('title',)}  # Auto-fills slug from title
     inlines = [IngredientInline, InstructionInline]  # ✅ Includes Ingredient form inside Recipe
 
