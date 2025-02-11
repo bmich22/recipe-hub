@@ -1,17 +1,22 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
 from .forms import UserRegistrationForm
 
 
-def login(request):
+def member_login(request):
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            # login here
-            return redirect("recipe:member-home")
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(request, username=username, password=password)  # Authenticate the user
+            if user is not None:
+                login(request, user)  # ✅ Log in the user
+                return redirect("recipe:member-home")  # ✅ Redirect after login
     else:
         form = AuthenticationForm()
+
     return render(request, "member/login.html", {"form": form})
 
 
@@ -24,9 +29,7 @@ def register(request):
         if form.is_valid():
             # information about new user is saved
             user = form.save()
-            login(request, user)  # Log in the user after registering
-            # send user back to recipe list page
-            return redirect("recipe:list")
+            return redirect("member:member_login")
     else:
         # if form is not submitted
         form = UserRegistrationForm()
@@ -34,7 +37,7 @@ def register(request):
     return render(request, "member/register.html", {"form": form})
 
 
-def logout(request):
+def member_logout(request):
     if request.method == "POST":
         logout(request)
-        return redirect("/recipes/")
+        return redirect("member:member_login")

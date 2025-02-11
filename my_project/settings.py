@@ -50,7 +50,7 @@ INSTALLED_APPS = [
 
 # Redirect after login/logout
 LOGIN_REDIRECT_URL = 'recipe:member-home'
-LOGOUT_REDIRECT_URL = 'login'  # Redirect to login after logout
+LOGOUT_REDIRECT_URL = 'recipe:list'  # Redirect to login after logout
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

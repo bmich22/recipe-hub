@@ -10,13 +10,13 @@
 <body>
     <h1>Member Login</h1>
     {% block message %}
+    <h3>Please sign in and start sharing!</h3>
     <p>Log in here to share recipes on our site.</p>
     <form action="/member/login/" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Login</button>
+        {{ form }}
+        <button type="button" class="btn btn-primary">Login</button>
     </form>
-    <h3>Don't have an account? Join us, we'd love to share recipes with you.  <a class="btn btn-primary" href="{% url 'member:register' %}">Sign Up</a></h3>
     {% endblock %}
 </body>
 </html>
