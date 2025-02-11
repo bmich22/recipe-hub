@@ -3,20 +3,19 @@ from django.views import generic
 from .forms import RecipeForm, IngredientFormSet
 from .models import Recipe, Ingredient
 
-# Create your views here.
-# def my_recipe(request):
-#     return HttpResponse("Here is the best recipe of all time!")
-
-
-# def RecipeList(request):
-#     return render(request, 'recipe/recipe_list.html')
 
 class RecipeList(generic.ListView):
     queryset = Recipe.objects.filter(status=1)
-    template_name = "recipe/index.html"
+    # template_name = "recipe/index.html"
     paginate_by = 6
-
-
+    
+    def get_template_names(self):
+        """Dynamically choose a template based on a condition."""
+        if self.request.user.is_authenticated:
+            return ["recipe/member_home.html"]  # Template for logged-in users
+        else:
+            return ["recipe/index.html"]  # Template for guests
+        
 def add_recipe(request):
     if request.method == "POST":
         form = RecipeForm(request.POST)

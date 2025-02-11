@@ -4,6 +4,17 @@ from django.contrib.auth import login, logout
 from .forms import UserRegistrationForm
 
 
+def login(request):
+    if request.method == "POST":
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            # login here
+            return redirect("recipe:member-home")
+    else:
+        form = AuthenticationForm()
+    return render(request, "member/login.html", {"form": form})
+
+
 def register(request):
     # if the form has been submitted
     if request.method == "POST":
@@ -21,17 +32,6 @@ def register(request):
         form = UserRegistrationForm()
     # validation message or empty form in the case that form was not submitted
     return render(request, "member/register.html", {"form": form})
-
-
-def login(request):
-    if request.method == "POST":
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            # login here
-            return redirect("recipe:list")
-    else:
-        form = AuthenticationForm()
-    return render(request, "member/login.html", {"form": form})
 
 
 def logout(request):
