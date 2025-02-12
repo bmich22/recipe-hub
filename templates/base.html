@@ -77,8 +77,7 @@
     
           <main class="container py-4">
           {% if user.is_authenticated %}
-            <p class="welcome">Welcome, {{ user.username }}!</p>
-            <p>Add your recipes:  <a class="btn btn-primary btn-sm"" href="/add_recipe/">Add Recipe</a></p> 
+            <p class="welcome">Welcome, {{ user.username }}! Have a great recipe?  Share it with us! <a class="btn btn-primary btn-sm"" href="/add_recipe/">Create a Recipe</a></p> 
           {% else %}
             <p class="welcome">Welcome to the recipe hub.</p>
           {% endif %}
@@ -96,9 +95,7 @@
       </div>
         <!-- Footer -->
           <footer class="mt-auto text-white text-center py-3">
-          <p class="m-0 text-center text-white">Made by Code Instituters</p>
-          <p class="m-0 text-center text-white">
-            Follow us: <i class="fab fa-facebook-square ms-3">FB</i>
+          <p class="m-0 text-center text-white">Made by Code Instituters | Follow us: <i class="fab fa-facebook-square ms-3">FB</i>
             <i class="fab fa-twitter-square ms-3">X</i>
             <i class="fab fa-instagram-square ms-3">I</i>
             <i class="fab fa-youtube-square ms-3">YT</i>

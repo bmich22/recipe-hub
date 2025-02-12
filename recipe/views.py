@@ -31,18 +31,16 @@ def recipe_detail(request, slug):
         
 def add_recipe(request):
     if request.method == "POST":
-        recipe_form = RecipeForm(request.POST)
-
-        if recipe_form.is_valid():
-            recipe = recipe_form.save(commit=False)
-            recipe.author = request.user  # Assign the logged-in user as the author
-            recipe.save()
-
-            return redirect("recipe_list")  # Redirect to the recipe list page
+        form = RecipeForm(request.POST)
+        if form.is_valid():
+            recipe = form.save(commit=False)  # Don't save yet
+            recipe.author = request.user  # Assign the logged-in user
+            recipe.save()  # Now save it
+            return redirect("recipe:list")  # Redirect to the recipe list page
 
     else:
-        recipe_form = RecipeForm()
+        form = RecipeForm()
 
     return render(request, "recipe/add_recipe.html", {
-        "recipe_form": recipe_form,
+        "form": form,
     })

@@ -12,8 +12,8 @@ def member_login(request):
             password = form.cleaned_data.get("password")
             user = authenticate(request, username=username, password=password)  # Authenticate the user
             if user is not None:
-                login(request, user)  # ✅ Log in the user
-                return redirect("recipe:list")  # ✅ Redirect after login
+                login(request, user)  # Log in the user
+                return redirect("recipe:list")  # Redirect after login
     else:
         form = AuthenticationForm()
 

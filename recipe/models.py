@@ -7,9 +7,21 @@ STATUS = ((0, "Draft"), (1, "Published"))
 
 # Create your models here.
 class Recipe(models.Model):
-    title = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200, unique=True, blank=False, default="Recipe Title")
+
+    def save(self, *args, **kwargs):
+        if not self.title:
+            base_title = "Recipe Title"
+            counter = 1
+            new_title = base_title
+            while Recipe.objects.filter(title=new_title).exists():
+                counter += 1
+                new_title = f"{base_title} {counter}"
+            self.title = new_title
+        super().save(*args, **kwargs)
+        
     description = models.TextField(blank=False, default="Description")
-    ingredients = models.CharField(max_length=100, blank=False, default="Ingredients")
+    ingredients = models.TextField(blank=False, default="Ingredients")
     instructions = models.TextField(blank=False, default="Instructions")
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipes")
     slug = models.SlugField(max_length=200, unique=True, blank=True)
