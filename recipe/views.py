@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from .forms import RecipeForm, IngredientFormSet
 from .models import Recipe, Ingredient
@@ -15,6 +15,26 @@ class RecipeList(generic.ListView):
             return ["recipe/member_home.html"]  # Template for logged-in users
         else:
             return ["recipe/index.html"]  # Template for guests
+        
+
+def recipe_detail(request, slug):
+    """
+    Display an individual :model:`recipe.Recipe`.
+
+    **Context**
+
+    ``post``
+    An instance of :model:`recipe.Recipe`.
+
+    **Template:**
+
+    :template:`recipe/recipe_detail.html`
+    """
+
+    queryset = Recipe.objects.filter(status=1)
+    recipe = get_object_or_404(queryset, slug=slug)
+    return render(request, "recipe/recipe_detail.html", {"recipe": recipe},)
+
         
 def add_recipe(request):
     if request.method == "POST":

@@ -77,9 +77,9 @@
     
           <main class="container py-4">
           {% if user.is_authenticated %}
-            <h2 class="">Welcome, {{ user.username }}!</h2> 
+            <p class="welcome">Welcome, {{ user.username }}!</p> 
           {% else %}
-            <h2 class="">Welcome to the recipe hub.</h2>
+            <p class="welcome">Welcome to the recipe hub.</p>
           {% endif %}
             {% block message %}
             <p>This is my default content.</p>

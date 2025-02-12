@@ -15,7 +15,8 @@
             <div class="card-body">
               <div class="image-container">
                 <div class="image-flash">
-                  <a href="#" class="recipe-link">
+                  <a href="{% url 'recipe:recipe_detail' recipe.slug %}" class="recipe-link">
+                    <!-- <a href="#" class="recipe-link"></a> -->
                     <h2 class="card-title">{{ recipe.title }}</h2>
                   </a>
                   <p class="author">Author: {{ recipe.author }}</p>
