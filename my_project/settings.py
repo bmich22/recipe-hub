@@ -28,7 +28,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -49,7 +49,7 @@ INSTALLED_APPS = [
 ]
 
 # Redirect after login/logout
-LOGIN_REDIRECT_URL = 'recipe:member-home'
+LOGIN_REDIRECT_URL = 'recipe:list'
 LOGOUT_REDIRECT_URL = 'recipe:list'  # Redirect to login after logout
 
 MIDDLEWARE = [

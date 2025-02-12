@@ -13,7 +13,7 @@ def member_login(request):
             user = authenticate(request, username=username, password=password)  # Authenticate the user
             if user is not None:
                 login(request, user)  # ✅ Log in the user
-                return redirect("recipe:member-home")  # ✅ Redirect after login
+                return redirect("recipe:list")  # ✅ Redirect after login
     else:
         form = AuthenticationForm()
 
@@ -29,7 +29,8 @@ def register(request):
         if form.is_valid():
             # information about new user is saved
             user = form.save()
-            return redirect("member:member_login")
+            login(request, user)
+            return redirect("recipe:list")
     else:
         # if form is not submitted
         form = UserRegistrationForm()
@@ -40,4 +41,4 @@ def register(request):
 def member_logout(request):
     if request.method == "POST":
         logout(request)
-        return redirect("member:member_login")
+        return redirect("recipe:list")
