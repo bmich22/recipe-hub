@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
-from .forms import RecipeForm, IngredientFormSet
-from .models import Recipe, Ingredient
+from .models import Recipe
+from .forms import RecipeForm
 
 
 class RecipeList(generic.ListView):
@@ -31,19 +31,18 @@ def recipe_detail(request, slug):
         
 def add_recipe(request):
     if request.method == "POST":
-        form = RecipeForm(request.POST)
-        formset = IngredientFormSet(request.POST)
+        recipe_form = RecipeForm(request.POST)
 
-        if form.is_valid() and formset.is_valid():
-            recipe = form.save()  # Save the Recipe
-            ingredients = formset.save(commit=False)  # Get ingredients but don't save yet
-            for ingredient in ingredients:
-                ingredient.recipe = recipe  # Assign the recipe to each ingredient
-                ingredient.save()  # Save each ingredient
-            return redirect('recipe_list')  # Redirect to the recipe list page
+        if recipe_form.is_valid():
+            recipe = recipe_form.save(commit=False)
+            recipe.author = request.user  # Assign the logged-in user as the author
+            recipe.save()
+
+            return redirect("recipe_list")  # Redirect to the recipe list page
 
     else:
-        form = RecipeForm()
-        formset = IngredientFormSet()
+        recipe_form = RecipeForm()
 
-    return render(request, 'recipe/add_recipe.html', {'form': form, 'formset': formset})
+    return render(request, "recipe/add_recipe.html", {
+        "recipe_form": recipe_form,
+    })

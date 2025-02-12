@@ -78,7 +78,7 @@
           <main class="container py-4">
           {% if user.is_authenticated %}
             <p class="welcome">Welcome, {{ user.username }}!</p>
-            <p>Add your recipes:  <a class="btn btn-primary btn-sm"" href="recipe/add_recipe.html">Add Recipe</a></p> 
+            <p>Add your recipes:  <a class="btn btn-primary btn-sm"" href="/add_recipe/">Add Recipe</a></p> 
           {% else %}
             <p class="welcome">Welcome to the recipe hub.</p>
           {% endif %}
