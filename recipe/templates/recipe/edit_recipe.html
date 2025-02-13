@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% load static %}
+
+  {% block content %}
+  <body>
+    <h2>Edit Recipe: {{ recipe.title }}</h2>
+    <form method="POST">
+	{% csrf_token %} 
+	{{ form.as_p }}
+    <button type="submit">Save Changes</button>
+    </form>
+  <a href="{% url 'recipe:recipe_detail' recipe.slug %}>Cancel</a>
+{% endblock %}

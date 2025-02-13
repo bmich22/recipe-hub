@@ -13,6 +13,10 @@
                 <div class="d-none d-md-block col-md-6 masthead-image">
                     <img src="{% static 'images/default2.jpg' %}" class="scale" alt="placeholder">
                 </div>
+                {% if user == recipe.author %}
+    				<a href="{% url 'recipe:edit_recipe' recipe.slug %}">Edit Recipe</a> |
+    				<a href="{% url 'recipe:delete_recipe' recipe.slug %}">Delete Recipe</a>
+				{% endif %}
             </div>
         </div>
     </div>

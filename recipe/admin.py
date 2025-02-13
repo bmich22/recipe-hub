@@ -15,5 +15,5 @@ admin.site.register(User, UserAdmin)
 # Register RecipeAdmin with the inline Ingredient form
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'status', 'author', 'created_on', 'approved')
+    list_display = ('title', 'slug', 'status', 'approved', 'author', 'created_on')
     prepopulated_fields = {'slug': ('title',)}  # Auto-fills slug from title
