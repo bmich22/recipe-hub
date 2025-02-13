@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from .models import Recipe
 from .forms import RecipeForm
 
@@ -36,6 +39,9 @@ def add_recipe(request):
             recipe = form.save(commit=False)  # Don't save yet
             recipe.author = request.user  # Assign the logged-in user
             recipe.save()  # Now save it
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Success! You recipe has been submitted and is awaiting approval')
             return redirect("recipe:list")  # Redirect to the recipe list page
 
     else:
@@ -44,3 +50,9 @@ def add_recipe(request):
     return render(request, "recipe/add_recipe.html", {
         "form": form,
     })
+
+
+@login_required
+def member_recipes(request):
+    member_list = Recipe.objects.filter(username="su15223")  # Get recipes for logged-in user
+    return render(request, "recipe/member_recipes.html", {"member_list": member_list})

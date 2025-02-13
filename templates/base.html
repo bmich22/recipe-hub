@@ -76,11 +76,25 @@
     
     
           <main class="container py-4">
-          {% if user.is_authenticated %}
-            <p class="welcome">Welcome, {{ user.username }}! Have a great recipe?  Share it with us! <a class="btn btn-primary btn-sm"" href="/add_recipe/">Create a Recipe</a></p> 
-          {% else %}
-            <p class="welcome">Welcome to the recipe hub.</p>
-          {% endif %}
+            {% if user.is_authenticated %}
+              <!-- if recipe has just been submitted display confirmation message -->
+              {% if messages %}
+                <div class="messages">
+                  {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                      <p class="welcome">Thanks {{ user.username }}! Keep them coming, we love your recipes! <a
+                        class="btn btn-primary btn-sm"" href=" /add_recipe/">Create a Recipe</a></p>
+                  {% endfor %}
+                </div>
+              {% else %}
+                <p class="welcome">Welcome, {{ user.username }}! Have a great recipe? Share it with us! <a
+                class="btn btn-primary btn-sm"" href=" /add_recipe/">Create a Recipe</a></p>
+                <p> Manage your recipes here <a
+                  class="btn btn-primary btn-sm"" href="/member_recipes/">Manage My Recipes</a></p>
+                {% endif %}
+            {% else %}
+              <p class="welcome">Welcome to the recipe hub.</p>
+            {% endif %}
             {% block message %}
             <p>This is my default content.</p>
             {% endblock message %}

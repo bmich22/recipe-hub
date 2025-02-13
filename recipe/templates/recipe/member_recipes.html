@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>My Recipes</h2>
+    {% if recipes %}
+        <ul>
+            {% for recipe in recipes %}
+                <li>{{ recipe.title }} - <a href="{% url 'slug' recipe.id %}">View</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't submitted any recipes yet.</p>
+    {% endif %}
+{% endblock %}

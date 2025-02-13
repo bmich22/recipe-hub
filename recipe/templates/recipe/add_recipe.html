@@ -1,23 +1,17 @@
-{% extends "base.html" %}
-{% load static %}
-{% load crispy_forms_tags %}
+{% extends "base.html" %} {% load static %} {% load crispy_forms_tags %} 
 
-{% block content %}
-<!-- {% load static %} -->
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Add Recipe</title>
-</head>
-<body>
+  </head>
+  {% block content %}
+  <body>
     <h2>Add a New Recipe</h2>
     <form method="POST">
-        {% csrf_token %}
-        <h3>Recipe Details</h3>
-        {{ form.as_p }}
-
-        <button type="submit">Save Recipe</button>
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Save Recipe</button>
     </form>
-</body>
+  </body>
 </html>
 {% endblock %}

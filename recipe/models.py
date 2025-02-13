@@ -20,9 +20,9 @@ class Recipe(models.Model):
             self.title = new_title
         super().save(*args, **kwargs)
         
-    description = models.TextField(blank=False, default="Description")
-    ingredients = models.TextField(blank=False, default="Ingredients")
-    instructions = models.TextField(blank=False, default="Instructions")
+    description = models.TextField(blank=False, default="You must enter a description here.")
+    ingredients = models.TextField(blank=False, default="Enter your ingredients with amounts and units here.")
+    instructions = models.TextField(blank=False, default="Enter your instructions here.")
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipes")
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     servings = models.IntegerField()
