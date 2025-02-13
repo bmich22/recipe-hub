@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from .models import Recipe
 from .forms import RecipeForm
+from django.contrib.auth.models import User
 
 
 class RecipeList(generic.ListView):
@@ -54,5 +55,5 @@ def add_recipe(request):
 
 @login_required
 def member_recipes(request):
-    member_list = Recipe.objects.filter(username="su15223")  # Get recipes for logged-in user
+    member_list = Recipe.objects.filter(author=request.user)  # Get recipes for logged-in user
     return render(request, "recipe/member_recipes.html", {"member_list": member_list})
