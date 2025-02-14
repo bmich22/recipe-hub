@@ -1,8 +1,4 @@
-{% extends "base.html" %} 
-{% block message %} 
-{% endblock message %} 
-{% block content %}
-<!-- index.html content starts here -->
+{% extends "base.html" %} {% load static %} {% block message %} {% endblock message %} {% block content %}
 <div class="container-fluid">
   <div class="row">
     <!-- Recipes Entries Column -->
@@ -13,8 +9,24 @@
           <div class="card mb-4">
             <div class="card-body">
               <div class="image-container">
+                {% if "placeholder" in post.featured_image.url %}
+                <img
+                  class="card-img-top"
+                  src="{% static 'images/default.jpg' %}"
+                  alt="placeholder image"
+                />
+                {% else %}
+                <img
+                  class="card-img-top"
+                  src=" {{ post.featured_image.url }}"
+                  alt="{{ post.title }}"
+                />
+                {% endif %}
                 <div class="image-flash">
-                  <a href="{% url 'recipe:recipe_detail' recipe.slug %}" class="recipe-link">
+                  <a
+                    href="{% url 'recipe:recipe_detail' recipe.slug %}"
+                    class="recipe-link"
+                  >
                     <!-- <a href="#" class="recipe-link"></a> -->
                     <h2 class="card-title">{{ recipe.title }}</h2>
                   </a>
@@ -32,18 +44,23 @@
     </div>
   </div>
   {% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-    {% endif %}
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+      <li>
+        <a href="?page={{ page_obj.previous_page_number }}" class="page-link"
+          >&laquo; PREV
+        </a>
+      </li>
+      {% endif %} {% if page_obj.has_next %}
+      <li>
+        <a href="?page={{ page_obj.next_page_number }}" class="page-link">
+          NEXT &raquo;</a
+        >
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
 </div>
-
-<!-- index.html content ends here -->
-{% endblock %}
+{% endblock content %}

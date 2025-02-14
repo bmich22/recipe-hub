@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from cloudinary.models import CloudinaryField
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
@@ -19,7 +20,8 @@ class Recipe(models.Model):
                 new_title = f"{base_title} {counter}"
             self.title = new_title
         super().save(*args, **kwargs)
-        
+
+    featured_image = CloudinaryField('image', default='placeholder')    
     description = models.TextField(blank=False, default="You must enter a description here.")
     ingredients = models.TextField(blank=False, default="Enter your ingredients with amounts and units here.")
     instructions = models.TextField(blank=False, default="Enter your instructions here.")
