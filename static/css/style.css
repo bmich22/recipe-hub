@@ -22,6 +22,10 @@ h3 {
     border:0;
 }
 
+.author {
+    margin-bottom: 0;
+}
+
 .card-title {
     font-size: 1.2rem;
 }

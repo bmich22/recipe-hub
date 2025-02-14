@@ -1,5 +1,4 @@
-{% extends "base.html" %} {% load static %} {% block message %} {% endblock
-message %} {% block content %}
+{% extends "base.html" %} {% load static %} {% block message %} {% endblock message %} {% block content %}
 <div class="container-fluid">
   <div class="row">
     <!-- Recipes Entries Column -->
@@ -31,11 +30,11 @@ message %} {% block content %}
                     <!-- <a href="#" class="recipe-link"></a> -->
                     <h2 class="card-title">{{ recipe.title }}</h2>
                   </a>
-                  <p class="author">Author: {{ recipe.author }}</p>
+                  <p class="author text-muted">Author: {{ recipe.author }}</p>
                 </div>
               </div>
-              <hr />
-              <p class="card-text text-muted h6">{{ recipe.created_on}}</p>
+              <!-- <hr /> -->
+              <p class="card-text small text-muted">{{ recipe.created_on}}</p>
             </div>
           </div>
         </div>
