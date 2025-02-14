@@ -2,10 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from .models import Recipe
 from .forms import RecipeForm
-
 
 
 class RecipeList(generic.ListView):
@@ -95,3 +94,15 @@ def delete_recipe(request, slug):
         return redirect("recipe:list")
 
     return render(request, "recipe/delete_recipe.html", {"recipe": recipe})
+
+
+def recipe_search(request):
+    query = request.GET.get('query', '')  # Get the search query from the URL parameter
+    recipes = Recipe.objects.filter(status=1)
+
+    if query:
+        recipes = recipes.filter(ingredients__icontains=query)  # Filter recipes by the query
+    return render(request, 'recipe/recipe_search.html', {
+        'query': query,
+        'recipes': recipes
+    })

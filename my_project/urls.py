@@ -19,7 +19,8 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    path('about/', views.about),
+    path("about/", include("about.urls"), name="about-urls"),
+    path('summernote/', include('django_summernote.urls')),
     path('member/', include('member.urls'), name='member.urls'),
     path('admin/', admin.site.urls),
     path('', include('recipe.urls'), name='recipe-urls'),

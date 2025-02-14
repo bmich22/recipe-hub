@@ -1,39 +1,40 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block message %} 
+{% extends 'base.html' %} {% load static %} {% block message %}
 <!-- <p> Recipe Detail Page</p> -->
-{% endblock message %}
-{% block content %}
+{% endblock message %} {% block content %}
 <div class="masthead">
-    <div class="container">
-        <div class="row g-0">
-            <div class="col-md-6 masthead-text">
-                <h1 class="recipe-title">{{ recipe.title }}</h1>
-                <p class="recipe-subtitle">{{ recipe.author }} | {{ recipe.created_on }}</p>
-                <div class="d-none d-md-block col-md-6 masthead-image">
-                    <img src="{% static 'images/default2.jpg' %}" class="scale" alt="placeholder">
-                </div>
-                {% if user == recipe.author %}
-    				<a href="{% url 'recipe:edit_recipe' recipe.slug %}">Edit Recipe</a> |
-    				<a href="{% url 'recipe:delete_recipe' recipe.slug %}">Delete Recipe</a>
-				{% endif %}
-            </div>
+  <div class="container">
+    <div class="row g-0">
+      <div class="col-md-6 masthead-text">
+        <h1 class="recipe-title">{{ recipe.title }}</h1>
+        <p class="recipe-subtitle">
+          {{ recipe.author }} | {{ recipe.created_on }}
+        </p>
+        <div class="d-none d-md-block col-md-6 masthead-image">
+          <img
+            src="{% static 'images/default2.jpg' %}"
+            class="scale"
+            alt="placeholder"
+          />
         </div>
+        {% if user == recipe.author %}
+        <a href="{% url 'recipe:edit_recipe' recipe.slug %}">Edit Recipe</a> |
+        <a href="{% url 'recipe:delete_recipe' recipe.slug %}">Delete Recipe</a>
+        {% endif %}
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="container">
-    <div class="row">
-        <div class="col card mb-4  mt-3 left  top">
-            <div class="card-body">
-                <!-- The recipe content goes inside the card-text. -->
-                <!-- Use the | safe filter inside the template tags -->
-                <p class="card-text">
-                    {{ recipe.content | safe }}
-                </p>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col card mb-4 mt-3 left top">
+      <div class="card-body">
+        <!-- The recipe content goes inside the card-text. -->
+        <!-- Use the | safe filter inside the template tags -->
+        <p class="card-text">{{ recipe.content | safe }}</p>
+      </div>
     </div>
+  </div>
 </div>
 
 {% endblock content %}

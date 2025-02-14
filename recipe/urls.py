@@ -6,6 +6,7 @@ from .views import member_recipes
 app_name = "recipe"
 
 urlpatterns = [
+    path('search/', views.recipe_search, name='recipe_search'),
     path('', views.RecipeList.as_view(), name="list"),
     path('add_recipe/', views.add_recipe, name="addrecipe"),
     path("member_recipes/", member_recipes, name="member_recipes"),

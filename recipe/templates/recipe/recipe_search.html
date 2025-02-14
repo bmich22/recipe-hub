@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% load static %}
+{% block content %}
+<h1>Search Results for: "{{ query }}"</h1>
+
+<!-- <form class="d-flex" role="search" method="GET" action="{% url 'recipe:recipe_search' %}">
+    <input class="form-control me-2" type="search" name="query" value="{{ query }}" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form> -->
+
+<h2>Results:</h2>
+<ul>
+    {% for recipe in recipes %}
+        <!-- <li>{{ recipe.title }}<a href="{% url 'recipe:recipe_detail' recipe.slug %}></a>View</li> -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="image-container">
+                  {% if "placeholder" in post.featured_image.url %}
+                  <img
+                    class="card-img-top"
+                    src="{% static 'images/default.jpg' %}"
+                    alt="placeholder image"
+                  />
+                  {% else %}
+                  <img
+                    class="card-img-top"
+                    src=" {{ post.featured_image.url }}"
+                    alt="{{ post.title }}"
+                  />
+                  {% endif %}
+                  <div class="image-flash">
+                    <a
+                      href="{% url 'recipe:recipe_detail' recipe.slug %}"
+                      class="recipe-link"
+                      <!-- <a href="#" class="recipe-link"></a> -->
+                      <h2 class="card-title">{{ recipe.title }}</h2>
+                    </a>
+                    <p class="author">Author: {{ recipe.author }}</p>
+                  </div>
+                </div>
+                <hr />
+                <p class="card-text text-muted h6">{{ recipe.created_on}}</p>
+              </div>
+            </div>
+          </div>
+          {% if forloop.counter|divisibleby:3 %}
+        </div>
+        <div class="row">{% endif %}
+    {% empty %}
+        <p>No recipes found.</p>
+    {% endfor %}
+</ul>
+{% endblock content %}
