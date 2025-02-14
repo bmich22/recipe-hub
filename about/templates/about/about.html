@@ -1,18 +1,20 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
-<div class="container mt-5">
+<div class="container">
   <div class="row">
     <div class="col-4 text-center">
       {% if "placeholder" in about.about_image.url %}
       <img
         src="{% static 'images/default.jpg' %}"
-        class="scale"
+        class="img-fluid scale"
+        style="max-width: 100%; height: auto"
         alt="placeholder image"
       />
       {% else %}
       <img
         src="{{ about.about_image.url }}"
-        class="scale"
-        alt="{{ post.title }}"
+        class="img-fluid scale"
+        style="max-width: 100%; height: auto"
+        alt="placeholder image"
       />
       {% endif %}
       <!-- <img src="{% static 'images/nobody.jpg' %}" width="75%" /> -->

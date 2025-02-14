@@ -1,15 +1,16 @@
-{% extends "base.html" %} {% load static %} {% block message %} {% endblock message %} {% block content %}
+{% extends "base.html" %} {% load static %} {% block message %} {% endblock
+message %} {% block content %}
 <div class="container-fluid">
   <div class="row">
     <!-- Recipes Entries Column -->
     <div class="col-12 mt-3 left">
       <div class="row">
         {% for recipe in recipe_list %}
-        <div class="col-md-4">
+        <div class="col-md-3">
           <div class="card mb-4">
             <div class="card-body">
               <div class="image-container">
-                {% if "placeholder" in post.featured_image.url %}
+                {% if "placeholder" in recipe.featured_image.url %}
                 <img
                   class="card-img-top"
                   src="{% static 'images/default.jpg' %}"
@@ -38,7 +39,7 @@
             </div>
           </div>
         </div>
-        {% if forloop.counter|divisibleby:3 %}
+        {% if forloop.counter|divisibleby:4 %}
       </div>
       <div class="row">{% endif %} {% endfor %}</div>
     </div>

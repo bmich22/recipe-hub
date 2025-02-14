@@ -1,17 +1,27 @@
 body {
-    background-color: #9db8a4;
+    background-color: #f0e0c0;
     padding-top: 2%;
+}
+.navbar-brand {
+    font-weight:800;
+    font-size: 2rem;
+    color: #842b2f;
 }
 
 h3 {
     padding-top: 5%;
 }
 
-.welcome {
-    margin-top: 0;
-    color:blue;
+.custom-content {
+    background-color: #2b3480;
+    color: white;
 }
 
-#text {
-    color: red;
+.btn {
+    background-color: #c67e10;
+    border:0;
+}
+
+.card-title {
+    font-size: 1.2rem;
 }

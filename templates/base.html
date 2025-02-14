@@ -37,14 +37,14 @@
         <!--  Navigation -->
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="{% url 'recipe:list' %}">the recipe hub</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link {% if request.path == about_url %}active{%endif%}" aria-current="page" href="{% url 'recipe:list' %}">Home</a>
+                  <a class="nav-link {% if request.path == about_url %}active{%endif%}" aria-current="page" href="{% url 'recipe:list' %}">home</a>
                 </li>
                 <li class="nav-item">
                   <a
@@ -52,76 +52,54 @@
                     {% if request.path == about_url %}active{%endif%}"
                     aria-current="page"
                     href="{% url 'about' %}"
-                    >About</a
-                  >
+                    >about</a>
                 </li>
                 {% if user.is_authenticated %}
-                  <!-- If user is logged in, display welcome message, member buttons and show Logout -->
+                  <!-- If user is logged in show Logout -->
                   <li class="nav-item">
                     <form action="{% url 'member:member_logout' %}" method="post" class="d-inline">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-link">Logout</button>
+                        <button type="submit" class="btn btn-light btn-sm">logout</button>
                     </form>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="">Welcome {{ user.username }}!</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="">Add Recipe</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="">Manage My Recipes</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="">Admin Panel</a>
-                  </li>
                 {% else %}
                   <!-- If user is NOT logged in, show Login -->
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'member:member_login' %}">Login/Register</a>
+                    <a class="nav-link" href="{% url 'member:member_login' %}">login/register</a>
                   </li>
-                  <!-- <li class="nav-item">
-                    <a class="nav-link" href="member/register">Register</a>
-                  </li> -->
                 {% endif %}
               </ul>
-              <!-- <form class="d-flex" role="search">
-                              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                              <button class="btn btn-outline-success" type="submit">Search</button>
-                            </form> -->
-              
               <form class="d-flex" role="search" method="GET" action="{% url 'recipe:recipe_search' %}">
-                <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-              
+                <input class="form-control me-2" type="search" name="query" placeholder="search" aria-label="Search">
+                <button class="btn btn-primary" type="submit">search</button>
+              </form>            
               </div>
               </div>
               </nav>
-        <main class="container py-4">
+        <main class="custom-content container py-4">
           {% if user.is_authenticated %}
             <!-- if recipe has just been submitted display confirmation message else welcome back member -->
                     {% if messages %}
                           <div class="messages">
                             {% for message in messages %}
-                                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                                <p class="welcome">Thanks {{ user.username }}! You can add or manage your recipes below: </p>
+                                <div class="welcom alert alert-{{ message.tags }}">{{ message }}
+                                <p>Thanks {{ user.username }}! You can add or manage your recipes below: </p>
                             {% endfor %}		
                     {% else %}
-                            <p class="welcome">Welcome, {{ user.username }}! Have a great recipe? Share it with us!</p>
+                            <p>Welcome, {{ user.username }}!</p>
                           {% endif %}
-              </div>
             <!-- end if recipe has just been submitted display confirmation message -->
             <!-- Display create recipe and manage recipes for members -->
             {% if request.user.is_superuser %}
-              <a class="btn btn-primary btn-sm"" href=" /add_recipe/">Create a Recipe</a>
-              <a class="btn btn-primary btn-sm"" href=" /member_recipes/">Manage My Recipes</a>
-              <a class="btn btn-primary btn-sm"" href=" /admin/">Admin Panel</a>
-              </p>
+            <div class="d-grid gap-2 d-md-block">
+              <a class="btn btn-primary btn-sm" href=" /add_recipe/">Create a Recipe</a>
+              <a class="btn btn-primary btn-sm" href=" /member_recipes/">Manage My Recipes</a>
+              <a class="btn btn-primary btn-sm" href=" /admin/">Admin Panel</a>
+            </div>
             {% else %}
               <p><a class="btn btn-primary btn-sm"" href=" /add_recipe/">Create a Recipe</a>
               <a class="btn btn-primary btn-sm"" href=" /member_recipes/">Manage My Recipes</a></p>
-            {% endif %} <!-- else User is not authenticated therefore not a member display simple welcome message -->
+            {% endif %}
+          </div> 
           {% else %}<!-- else User is not authenticated therefore not a member display simple welcome message -->
             <p class="welcome">Welcome to the recipe hub.</p>
           {% endif %}
