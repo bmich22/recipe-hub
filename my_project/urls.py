@@ -19,9 +19,9 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    path("about/", include("about.urls"), name="about-urls"),
-    path('summernote/', include('django_summernote.urls')),
-    path('member/', include('member.urls'), name='member.urls'),
     path('admin/', admin.site.urls),
-    path('', include('recipe.urls'), name='recipe-urls'),
+    path('summernote/', include('django_summernote.urls')),
+    path("about/", include("about.urls")),
+    path('member/', include('member.urls')),
+    path('', include('recipe.urls')),    
 ]

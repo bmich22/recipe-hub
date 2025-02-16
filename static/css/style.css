@@ -1,7 +1,8 @@
 body {
-    background-color: #f0e0c0;
+    background-color: #e0cda5;
     padding-top: 2%;
 }
+
 .navbar-brand {
     font-weight:800;
     font-size: 2rem;
@@ -28,4 +29,14 @@ h3 {
 
 .card-title {
     font-size: 1.2rem;
+}
+
+.nav-link.active {
+    font-weight: bold;  /* Makes the link bold */
+}
+
+.logout {
+    border:0;
+    color: rgb(13, 110, 253);
+    text-decoration:underline;
 }
