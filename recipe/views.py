@@ -10,7 +10,7 @@ from .forms import RecipeForm
 class RecipeList(generic.ListView):
     queryset = Recipe.objects.filter(status=1)
     template_name = "recipe/index.html"
-    paginate_by = 6
+    paginate_by = 4
     
 
 def recipe_detail(request, slug):

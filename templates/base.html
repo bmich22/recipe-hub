@@ -44,12 +44,12 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link {% if request.path == about_url %}active{%endif%}" aria-current="page" href="{% url 'recipe:list' %}">home</a>
+                  <a class="nav-link {% if request.path == list.url %}active{%endif%}" aria-current="page" href="{% url 'recipe:list' %}">home</a>
                 </li>
                 <li class="nav-item">
                   <a
                     class="nav-link
-                    {% if request.path == about_url %}active{%endif%}"
+                    {% if request.path == about.url %}active{%endif%}"
                     aria-current="page"
                     href="{% url 'about' %}"
                     >about</a>
@@ -75,7 +75,7 @@
               </div>
               </div>
               </nav>
-        <main class="custom-content container py-4">
+        <main class="custom-content container py-3">
           {% if user.is_authenticated %}
             <!-- if recipe has just been submitted display confirmation message else welcome back member -->
                     {% if messages %}
