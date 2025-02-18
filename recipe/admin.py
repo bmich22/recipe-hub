@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Recipe
+from .models import Recipe, Comment
 from django.contrib.auth.models import User
 
 
@@ -20,3 +20,7 @@ admin.site.register(User, UserAdmin)
 class RecipeAdmin(admin.ModelAdmin):
     list_display = ('approved', 'title', 'slug', 'featured_image','status', 'author', 'created_on')
     prepopulated_fields = {'slug': ('title',)}  # Auto-fills slug from title
+
+
+# Register the Comment model
+admin.site.register(Comment)

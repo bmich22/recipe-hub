@@ -15,18 +15,8 @@ class RecipeList(generic.ListView):
 
 def recipe_detail(request, slug):
     """
-    Display an individual :model:`recipe.Recipe`.
-
-    **Context**
-
-    ``post``
-    An instance of :model:`recipe.Recipe`.
-
-    **Template:**
-
-    :template:`recipe/recipe_detail.html`
+    Display an individual recipe
     """
-
     queryset = Recipe.objects.filter(status=1)
     recipe = get_object_or_404(queryset, slug=slug)
     return render(request, "recipe/recipe_detail.html", {"recipe": recipe},)
