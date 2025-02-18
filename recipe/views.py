@@ -8,7 +8,7 @@ from .forms import RecipeForm
 
 
 class RecipeList(generic.ListView):
-    queryset = Recipe.objects.filter(status=1)
+    queryset = Recipe.objects.filter(status=1, approved=True).order_by('-created_on')
     template_name = "recipe/index.html"
     paginate_by = 4
     
@@ -34,7 +34,7 @@ def recipe_detail(request, slug):
         
 def add_recipe(request):
     if request.method == "POST":
-        form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
             recipe = form.save(commit=False)  # Don't save yet
             recipe.author = request.user  # Assign the logged-in user
@@ -69,7 +69,7 @@ def edit_recipe(request, slug):
         # return redirect("recipe:recipe_detail", slug=recipe.slug)
 
     if request.method == "POST":
-        form = RecipeForm(request.POST, instance=recipe)
+        form = RecipeForm(request.POST, request.FILES, instance=recipe)
         if form.is_valid():	
             form.save()
             messages.success(request, "Recipe updated successfully")

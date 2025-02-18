@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from .views import add_recipe
 from .views import member_recipes
+from django.conf.urls.static import static
 
 app_name = "recipe"
 

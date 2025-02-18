@@ -1,40 +1,26 @@
 {% extends "base.html" %} {% load static %} {% block message %} {% endblock message %} {% block content %}
 <div class="container-fluid">
   <div class="row">
-    <!-- Recipes Entries Column -->
-    <div class="col-12 mt-3 left">
+    <div class="col-12 mt-2">
       <div class="row">
         {% for recipe in recipe_list %}
-        <div class="col-md-3">
+        <div class="col-lg-3">
           <div class="card mb-4">
-            <div class="card-body">
-              <div class="image-container">
+            <div class=" list card-body">
                 {% if "placeholder" in recipe.featured_image.url %}
-                <img
-                  class="card-img-top"
-                  src="{% static 'images/default.jpg' %}"
-                  alt="placeholder image"
-                />
+                <img class="img-fluid w-100" style="height: 250px; object-fit: cover"
+                  src="{% static 'images/default.jpg' %}" alt="placeholder image" />
                 {% else %}
-                <img
-                  class="card-img-top"
-                  src=" {{ post.featured_image.url }}"
-                  alt="{{ post.title }}"
-                />
+                <img class="img-fluid w-100" style="height: 250px; object-fit: cover"
+                  src=" {{ recipe.featured_image.url }}" alt="{{ recipe.title }}" />
                 {% endif %}
-                <div class="image-flash">
-                  <a
-                    href="{% url 'recipe:recipe_detail' recipe.slug %}"
-                    class="recipe-link"
-                  >
-                    <!-- <a href="#" class="recipe-link"></a> -->
-                    <h2 class="card-title">{{ recipe.title }}</h2>
-                  </a>
-                  <p class="author text-muted">Author: {{ recipe.author }}</p>
-                </div>
-              </div>
-              <!-- <hr /> -->
-              <p class="card-text small text-muted">{{ recipe.created_on}}</p>
+                <a href="{% url 'recipe:recipe_detail' recipe.slug %}" class="recipe-link">
+                <!-- <a href="#" class="recipe-link"></a> -->
+                <h2 class="card-title pt-2">{{ recipe.title }}</h2>
+                </a>
+                <p class="author text-muted">Author: {{ recipe.author }}</p>
+              <hr />
+                <p class="card-text small text-muted">{{ recipe.created_on}}</p>
             </div>
           </div>
         </div>
@@ -48,15 +34,13 @@
     <ul class="pagination justify-content-center">
       {% if page_obj.has_previous %}
       <li>
-        <a href="?page={{ page_obj.previous_page_number }}" class="page-link"
-          >&laquo; PREV
+        <a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV
         </a>
       </li>
       {% endif %} {% if page_obj.has_next %}
       <li>
         <a href="?page={{ page_obj.next_page_number }}" class="page-link">
-          NEXT &raquo;</a
-        >
+          NEXT &raquo;</a>
       </li>
       {% endif %}
     </ul>

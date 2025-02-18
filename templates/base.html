@@ -26,10 +26,12 @@
       crossorigin="anonymous"
     ></script>
 
+    <script src="https://kit.fontawesome.com/7fa9d59fcb.js" crossorigin="anonymous"></script>
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
-    <title>The Recipe Hub</title>
+    <title>the recipe hub</title>
   </head>
   
   <div class="container">
@@ -92,12 +94,14 @@
               <a class="btn btn-primary btn-sm" href=" /admin/">Admin Panel</a>
             </div>
             {% else %}
-              <p><a class="btn btn-primary btn-sm"" href=" /add_recipe/">Create a Recipe</a>
-              <a class="btn btn-primary btn-sm"" href=" /member_recipes/">Manage My Recipes</a></p>
+              <p><a class="btn btn-primary btn-sm" href=" /add_recipe/">Create a Recipe</a>
+              <a class="btn btn-primary btn-sm" href=" /member_recipes/">Manage My Recipes</a></p>
             {% endif %}
           </div> 
           {% else %}<!-- else User is not authenticated therefore not a member display simple welcome message -->
-            <p class="welcome">Welcome to the recipe hub.</p>
+            <h2>Welcome! </h2>
+            <p class="mb-0">Feel free to peruse and enjoy. </p>
+            <p class="mb-0">If you'd like to share recipes with us, register now and start sharing!</p>
           {% endif %}
         </section>
           
@@ -111,11 +115,11 @@
   </div>
         <!-- Footer -->
           <footer class="mt-auto text-white text-center py-3">
-          <p class="m-0 text-center text-white">Made by Code Instituters | Follow us: <i class="fab fa-facebook-square ms-3">FB</i>
-            <i class="fab fa-twitter-square ms-3">X</i>
-            <i class="fab fa-instagram-square ms-3">I</i>
-            <i class="fab fa-youtube-square ms-3">YT</i>
-          </p>
-        </footer>
+            <p class="m-0 text-center text-white"><i class="fa-regular fa-copyright fa-xs"></i> the recipe hub | Follow us: 
+              <i class="fa-brands fa-facebook ms-3" href=""></i>
+              <i class="fa-brands fa-square-instagram ms-3" href=""></i>
+              <i class="fab fa-youtube-square ms-3" href=""></i>
+            </p>
+          </footer>
       
 </html>

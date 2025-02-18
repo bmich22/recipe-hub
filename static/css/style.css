@@ -28,7 +28,7 @@ h3 {
 }
 
 .card-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .nav-link.active {
@@ -39,4 +39,29 @@ h3 {
     border:0;
     color: rgb(13, 110, 253);
     text-decoration:underline;
+}
+
+.list card-body {
+    height: 440px;
+}
+
+textarea#id_description,
+textarea#id_ingredients,
+textarea#id_instructions {
+    display: block;
+    width: 80%;
+    padding: 10px;
+}
+
+input#id_servings {
+    width: 50px;
+}
+
+.login_page form {
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+input {
+    border-radius: 5px;
 }

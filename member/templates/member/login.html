@@ -2,21 +2,27 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Member Login</title>
-</head>
-<body>
-    <h1>Member Login</h1>
+  </head>
+  <body>
+    <h1>the recibe hub member login</h1>
     {% block content %}
-    <p>Log in here to share recipes on our site.</p>
-    <form action="/member/login/" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+    <div class="login_page">
+      <h6>Log in here to share recipes on our site.</h6>
+      <form action="/member/login/" method="post">
+        {% csrf_token %} {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Login</button>
-    </form>
-    <h3>Don't have an account? Join us, we'd love to share recipes with you.  <a class="btn btn-primary" href="{% url 'member:register' %}">Sign Up</a></h3>
-    {% endblock %}
-</body>
+      </form>
+      <h6>
+        Don't have an account? Join us, we'd love to share recipes with you.
+        <a class="btn btn-primary" href="{% url 'member:register' %}"
+          >Sign Up</a
+        >
+      </h6>
+      {% endblock %}
+    </div>
+  </body>
 </html>

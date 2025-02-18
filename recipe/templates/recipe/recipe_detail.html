@@ -1,37 +1,47 @@
 {% extends 'base.html' %} {% load static %} {% block message %}
-<!-- <p> Recipe Detail Page</p> -->
 {% endblock message %} {% block content %}
-<div class="masthead">
   <div class="container">
-    <div class="row g-0">
-      <div class="col-md-6 masthead-text">
+    <div class="row">
         <h1 class="recipe-title">{{ recipe.title }}</h1>
-        <p class="recipe-subtitle">
-          {{ recipe.author }} | {{ recipe.created_on }}
+        <p class="recipe-subtitle mb-0">
+          {{ recipe.author }} | {{ recipe.created_on }} | Servings: {{ recipe.servings}}
         </p>
-        <div class="d-none d-md-block col-md-6 masthead-image">
-          <img
-            src="{% static 'images/default2.jpg' %}"
-            class="scale"
-            alt="placeholder"
-          />
-        </div>
         {% if user == recipe.author %}
-        <a href="{% url 'recipe:edit_recipe' recipe.slug %}">Edit Recipe</a> |
-        <a href="{% url 'recipe:delete_recipe' recipe.slug %}">Delete Recipe</a>
-        {% endif %}
+        <div class="d-flex mb-2">
+          <a href="{% url 'recipe:edit_recipe' recipe.slug %}" class="link me-3">Edit This Recipe</a>
+          <a href="{% url 'recipe:delete_recipe' recipe.slug %}"class="link">Delete This Recipe</a>
       </div>
+        {% endif %}
+        <div class="d-md block col-md-6">
+          {% if "placeholder" in recipe.featured_image.url %}
+                <img
+                  class="img-fluid scale"
+                  src="{% static 'images/default.jpg' %}"
+                  style="max-width: 80%; height: auto"
+                  alt="placeholder image"
+                />
+                {% else %}
+                <img
+                  class="img-fluid scale"
+                  src=" {{ recipe.featured_image.url }}"
+                  style="max-width: 80%; height: auto"
+                  alt="featured image"
+                />
+          {% endif %}
+        </div>
     </div>
   </div>
-</div>
 
 <div class="container">
   <div class="row">
-    <div class="col card mb-4 mt-3 left top">
+    <div class="col card m-2 p-3 left top">
       <div class="card-body">
-        <!-- The recipe content goes inside the card-text. -->
-        <!-- Use the | safe filter inside the template tags -->
-        <p class="card-text">{{ recipe.content | safe }}</p>
+        <!-- The recipe ingredients and instructions goes inside the card-text. -->
+        <p class="card-text">{{ recipe.description | linebreaksbr }}</p>
+         <h2>Ingredients</h2>
+        <p class="card-text">{{ recipe.ingredients | linebreaksbr }}</p>
+        <h2>Instructions</h2>
+        <p class="card-text">{{ recipe.instructions | linebreaksbr }}</p>
       </div>
     </div>
   </div>
