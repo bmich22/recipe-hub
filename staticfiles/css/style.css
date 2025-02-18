@@ -1,8 +1,67 @@
 body {
-    background-color: #9db8a4;
+    background-color: #e0cda5;
     padding-top: 2%;
+}
+
+.navbar-brand {
+    font-weight:800;
+    font-size: 2rem;
+    color: #842b2f;
 }
 
 h3 {
     padding-top: 5%;
+}
+
+.custom-content {
+    background-color: #2b3480;
+    color: white;
+}
+
+.btn {
+    background-color: #c67e10;
+    border:0;
+}
+
+.author {
+    margin-bottom: 0;
+}
+
+.card-title {
+    font-size: 1.1rem;
+}
+
+.nav-link.active {
+    font-weight: bold;  /* Makes the link bold */
+}
+
+.logout {
+    border:0;
+    color: rgb(13, 110, 253);
+    text-decoration:underline;
+}
+
+.list card-body {
+    height: 440px;
+}
+
+textarea#id_description,
+textarea#id_ingredients,
+textarea#id_instructions {
+    display: block;
+    width: 80%;
+    padding: 10px;
+}
+
+input#id_servings {
+    width: 50px;
+}
+
+.login_page form {
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+input {
+    border-radius: 5px;
 }
