@@ -71,31 +71,31 @@
     <!-- Custom content to user including messages after creating, editing or commenting recipes -->
     <section class="custom-content container py-3">
       {% if user.is_authenticated %}
-      <!-- if recipe has just been submitted display confirmation message else welcome back member -->
-      {% if messages %}
-      <div class="messages">
-        {% for message in messages %}
-        <div class="welcom alert">
-          <div class="fw-bold alert-{{ message.tags }}">{{ message }}</div>
-          <p>Thanks {{ user.username }}! You can add or manage your recipes below: </p>
-          {% endfor %}
-          {% else %}
-          <p>Welcome, {{ user.username }}!</p>
-          {% endif %}
-          <!-- end if recipe has just been submitted display confirmation message -->
-          <!-- Display create recipe and manage recipes for members -->
-          {% if request.user.is_superuser %}
+        <!-- if recipe has just been submitted display confirmation message else welcome back member -->
+        {% if messages %}
+          <div class="messages">
+            {% for message in messages %}
+              <div class="welcom alert">
+                <div class="fw-bold alert-{{ message.tags }}">{{ message }}</div>
+                <p>Thanks {{ user.username }}! You can add or manage your recipes below: </p>
+            {% endfor %}
+        {% else %}
+        <p>Welcome, {{ user.username }}!</p>
+        {% endif %}
+        <!-- end if recipe has just been submitted display confirmation message -->
+        <!-- Display create recipe and manage recipes for members -->
+        {% if request.user.is_superuser %}
           <div class="d-grid gap-2 d-md-block">
             <a class="btn btn-primary btn-sm" href=" /add_recipe/">Create a Recipe</a>
             <a class="btn btn-primary btn-sm" href=" /member_recipes/">Manage My Recipes</a>
             <a class="btn btn-primary btn-sm" href=" /admin/">Admin Panel</a>
           </div>
-          {% else %}
+        {% else %}
           <p><a class="btn btn-primary btn-sm" href=" /add_recipe/">Create a Recipe</a>
-            <a class="btn btn-primary btn-sm" href=" /member_recipes/">Manage My Recipes</a>
+          <a class="btn btn-primary btn-sm" href=" /member_recipes/">Manage My Recipes</a>
           </p>
-          {% endif %}
-        </div>
+        {% endif %}
+          </div>
         {% else %}<!-- else User is not authenticated therefore not a member display simple welcome message -->
         <h2>Welcome! </h2>
         <p class="mb-0">Feel free to peruse and enjoy our recipes.

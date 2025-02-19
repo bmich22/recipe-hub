@@ -4,10 +4,9 @@ from .models import Comment
 
 
 class RecipeForm(forms.ModelForm):
-    # Define the fields in the class body, not inside the Meta class
     title = forms.CharField(
-        max_length=200, 
-        widget=forms.TextInput(attrs={'placeholder': 'Recipe Title'})
+        max_length=50, 
+        widget=forms.TextInput(attrs={'placeholder': 'Recipe Title, max 50 characters'})
     )
     
     description = forms.CharField(
