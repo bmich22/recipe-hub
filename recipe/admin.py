@@ -20,6 +20,7 @@ admin.site.register(User, UserAdmin)
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
     list_display = ('approved', 'title', 'slug', 'featured_image', 'status', 'author', 'created_on')
+    list_display_links = ('approved', 'title', 'slug')  # Fields that are clickable
     prepopulated_fields = {'slug': ('title',)}  # Auto-fills slug from title
 
 
@@ -32,6 +33,7 @@ def approve_comments(modeladmin, request, queryset):
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('approved', 'body', 'recipe', 'author', 'created_on')
+    list_display_links = ('approved', 'body', 'recipe')  # Fields that are clickable
     actions = [approve_comments]
 
 

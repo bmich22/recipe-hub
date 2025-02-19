@@ -8,18 +8,18 @@
     <div class="col-12 mt-2">
       <div class="row">
         {% for recipe in member_list %}
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-md-6">
           <div class="card mb-4">
             {% if "placeholder" in recipe.featured_image.url %}
-              <img class="img-fluid w-100" style="height: 250px; object-fit: cover"
+              <img class="img-fluid w-100" style="height: 220px; object-fit: cover"
                 src="{% static 'images/default.jpg' %}" alt="placeholder image" />
               {% else %}
-              <img class="img-fluid w-100" style="height: 250px; object-fit: cover"
+              <img class="img-fluid w-100" style="height: 220px; object-fit: cover"
                 src=" {{ recipe.featured_image.url }}" alt="{{ recipe.title }}" />
               {% endif %}
             <div class="card-body pt-3">
               <div class="title-container mb-2">
-              <h2 class="card-title fs-5" style="height:80px">{{ recipe.title }}</h2>
+              <h2 class="card-title fs-5" style="height:64px">{{ recipe.title }}</h2>
               </div>
               <p class="author text-muted">Author: {{ recipe.author }}</p>
               <hr />
