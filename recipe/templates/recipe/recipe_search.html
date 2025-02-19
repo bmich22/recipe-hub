@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% load static %}
 {% block content %}
-<h1>Search Results for: "{{ query }}"</h1>
+<h1 class="fs-3">Search Results for: "{{ query }}"</h1>
 
 <div class="container">
   <div class="row">
@@ -16,8 +16,10 @@
             <img class="card-img-top img-fluid-w100" style="height: 250px; object-fit: cover"
               src=" {{ recipe.featured_image.url }}" alt="{{ recipe.title }}" />
             {% endif %}
-            <div class="card-body">
-              <h2 class="card-title">{{ recipe.title }}</h2>
+            <div class="card-body pt-3">
+              <div class="title-container mb-2" style="height:80px">
+              <h2 class="card-title fs-5">{{ recipe.title }}</h2>
+              </div>
               <p class="author">Author: {{ recipe.author }}</p>
               <hr />
               <p class="card-text text-muted h6">{{ recipe.created_on}}</p>

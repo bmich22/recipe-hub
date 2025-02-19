@@ -13,8 +13,10 @@
               <img class="card-img-top img-fluid w-100" style="height: 250px; object-fit: cover"
               src=" {{ recipe.featured_image.url }}" alt="{{ recipe.title }}" />
             {% endif %}
-            <div class="card-body">
-              <h2 class="card-title pt-2">{{ recipe.title }}</h2>
+            <div class="card-body pt-3">
+              <div class="title-container mb-2" style="height:80px">
+                <h2 class="card-title fs-5">{{ recipe.title }}</h2>
+              </div>
               <p class="author text-muted">Author: {{ recipe.author }}</p>
               <hr />
               <p class="card-text small text-muted">{{ recipe.created_on}}</p>

@@ -13,7 +13,7 @@ h3 {
     padding-top: 5%;
 }
 
-.custom-content {
+.custom-content, {
     background-color: #2b3480;
     color: white;
 }
@@ -62,5 +62,6 @@ input {
     border-radius: 5px;
 }
 
-.custom-textarea {
+.approval {
+    color: #842b2f;
 }

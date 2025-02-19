@@ -50,7 +50,6 @@
               <a class="nav-link {% if request.path == about_url %}active{% endif %}" href="{{ about_url }}">about</a>
             </li>
           </ul>
-
           <!-- Right-side login/logout + search -->
           <div class="d-flex align-items-center ms-auto">
             {% if user.is_authenticated %}
@@ -69,7 +68,7 @@
         </div>
       </div>
     </nav>
-
+    <!-- Custom content to user including messages after creating, editing or commenting recipes -->
     <section class="custom-content container py-3">
       {% if user.is_authenticated %}
       <!-- if recipe has just been submitted display confirmation message else welcome back member -->
@@ -107,26 +106,12 @@
       {% block content %}
       <p></p>
       {% endblock content %}
-      <!-- displaying Django messages -->
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 offset-md-2">
-            {% for message in messages %}
-            <div class="alert {{ message.tags }} alert-dismissible
-        fade show" id="msg" role="alert">
-              {{ message | safe }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
     </main>
 </div>
 </body>
 </div>
 <!-- Footer -->
-<footer class="mt-auto text-white text-center py-3">
+<footer class="bg-dark text-light mt-auto text-center py-3">
   <p class="m-0 text-center text-white"><i class="fa-regular fa-copyright fa-xs"></i> the recipe hub | Follow us:
     <i class="fa-brands fa-facebook ms-3" href=""></i>
     <i class="fa-brands fa-square-instagram ms-3" href=""></i>
