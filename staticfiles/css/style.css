@@ -13,7 +13,7 @@ h3 {
     padding-top: 5%;
 }
 
-.custom-content {
+.custom-content, {
     background-color: #2b3480;
     color: white;
 }
@@ -60,4 +60,8 @@ input#id_servings {
 
 input {
     border-radius: 5px;
+}
+
+.approval {
+    color: #842b2f;
 }

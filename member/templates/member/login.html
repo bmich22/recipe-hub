@@ -5,13 +5,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Member Login</title>
+    <title>the recipe hub login</title>
   </head>
   <body>
-    <h1>the recibe hub member login</h1>
+    <h1>the recipe hub login</h1>
     {% block content %}
     <div class="login_page">
-      <h6>Log in here to share recipes on our site.</h6>
+      <p class="fs-4">Log in here to share recipes on our site.</p>
       <form action="/member/login/" method="post">
         {% csrf_token %} {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Login</button>

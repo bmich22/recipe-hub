@@ -14,7 +14,7 @@ def validate_not_empty(value):
 
 
 class Recipe(models.Model):
-    title = models.CharField(max_length=200, unique=True, blank=False)
+    title = models.CharField(max_length=50, unique=True, blank=False)
     featured_image = CloudinaryField('image', folder="recipes/", format="jpg", unique_filename=False, default="placeholder")
     description = models.TextField(blank=False, validators=[validate_not_empty])
     ingredients = models.TextField(blank=False, validators=[validate_not_empty])

@@ -4,17 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member Document</title>
+    <title>the recipe hub registration page</title>
 </head>
 <body>
-    <h1>Hello World!</h1>
+    <h1>the recipe hub registration page</h1>
     {% block content %}
-    <p>Register here to join our community.</p>
-    <form action="/member/register/" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-primary">Submit</button>
-    </form>
+    <div class="start-pages">
+        <p class="fs-4">Register here to join our community.</p>
+        <form action="/member/register/" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary">Submit</button>
+        </form>
+    </div>
     {% endblock %}
 </body>
 </html>
