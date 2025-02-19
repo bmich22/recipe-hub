@@ -28,6 +28,12 @@ class RecipeForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+    # Assign form class 'form-control'to make text area responsive
+    body = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your comment here.'}),
+        label=False  # This removes the label entirely
+    )
+
     class Meta:
         model = Comment
         fields = ('body',)

@@ -1,77 +1,72 @@
-{% extends 'base.html' %} {% load static %} {% block message %}
+{% extends 'base.html' %} {% load static %} {% block message %} 
 {% endblock message %} {% block content %}
-  <div class="container">
-    <div class="row">
-        <h1 class="recipe-title">{{ recipe.title }}</h1>
-        <p class="recipe-subtitle mb-0">
-          {{ recipe.author }} | {{ recipe.created_on }} | Servings: {{ recipe.servings}}
-        </p>
-        {% if user == recipe.author %}
-        <div class="d-flex mb-2">
-          <a href="{% url 'recipe:edit_recipe' recipe.slug %}" class="link me-3">Edit This Recipe</a>
-          <a href="{% url 'recipe:delete_recipe' recipe.slug %}"class="link">Delete This Recipe</a>
-      </div>
-        {% endif %}
-        <div class="d-md block col-md-6">
-          {% if "placeholder" in recipe.featured_image.url %}
-                <img
-                  class="img-fluid scale"
-                  src="{% static 'images/default.jpg' %}"
-                  style="max-width: 80%; height: auto"
-                  alt="placeholder image"
-                />
-                {% else %}
-                <img
-                  class="img-fluid scale"
-                  src=" {{ recipe.featured_image.url }}"
-                  style="max-width: 80%; height: auto"
-                  alt="featured image"
-                />
-          {% endif %}
-        </div>
-    </div>
-  </div>
-
 <div class="container">
+  <div class="d-md block col-md-6">
+    {% if "placeholder" in recipe.featured_image.url %}
+    <img
+      class="img-fluid scale"
+      src="{% static 'images/default.jpg' %}"
+      style="max-width: 70%; height: auto"
+      alt="placeholder image"
+    />
+    {% else %}
+    <img
+      class="img-fluid scale"
+      src=" {{ recipe.featured_image.url }}"
+      style="max-width: 70%; height: auto"
+      alt="featured image"
+    />
+    {% endif %}
+  </div>
+  <h1 class="recipe-title fs-2">{{ recipe.title }}</h1>
+  <p class="recipe-subtitle mb-0">
+    {{ recipe.author }} | {{ recipe.created_on }} | Servings: {{
+    recipe.servings}}
+  </p>
+  {% if user == recipe.author %}
+  <div class="d-flex mb-2">
+    <a href="{% url 'recipe:edit_recipe' recipe.slug %}" class="link me-3"
+      >Edit This Recipe</a
+    >
+    <a href="{% url 'recipe:delete_recipe' recipe.slug %}" class="link"
+      >Delete This Recipe</a
+    >
+  </div>
+  {% endif %}
+</div>
+<div class="container mt-3">
   <div class="row">
-    <div class="col card m-2 p-3 left top">
+    <div class="col card left top">
       <div class="card-body">
-        <!-- The recipe ingredients and instructions goes inside the card-text. -->
         <p class="card-text">{{ recipe.description | linebreaksbr }}</p>
-         <h2>Ingredients</h2>
+        <h2 class="fs-3">Ingredients</h2>
         <p class="card-text">{{ recipe.ingredients | linebreaksbr }}</p>
-        <h2>Instructions</h2>
+        <h2 class="fs-3">Instructions</h2>
         <p class="card-text">{{ recipe.instructions | linebreaksbr }}</p>
       </div>
     </div>
   </div>
-   <!-- Displaying Comments -->
-   <div class="row">
-    <div class="col-md-8 card mb-4  mt-3 ">
-      <h3>Comments:</h3>
+  <!-- Displaying Comments -->
+  <div class="row">
+    <div class="col-md-8 card mb-4 mt-3">
+      <h3 class="fs-4">Comments:</h3>
       <div class="card-body">
-        <!-- We want a for loop inside the empty control tags
-          to iterate through each comment in comments -->
         {% for comment in comments %}
-        <div class="p-2 comments
-          {% if not comment.approved and comment.author == user %}
-          faded{% elif not comment.approved %} d-none{% endif %}">
+        <div
+          class="p-2 comments {% if not comment.approved and comment.author == user %} faded{% elif not comment.approved %} d-none{% endif %}"
+        >
           <p class="font-weight-bold">
             {{ comment.author }}
-            <span class="font-weight-normal">
-              {{ comment.created_on }}
-            </span> wrote:
+            <span class="font-weight-normal"> {{ comment.created_on }} </span>
+            wrote:
           </p>
           <div id="comment{{ comment.id }}">
             {{ comment.body | linebreaks }}
           </div>
           {% if not comment.approved and comment.author == user %}
-          <p class="approval">
-            This comment is awaiting approval
-          </p>
+          <p class="approval">This comment is awaiting approval</p>
           {% endif %}
         </div>
-        <!-- Our for loop ends here -->
         {% endfor %}
       </div>
     </div>
@@ -81,12 +76,11 @@
         {% if user.is_authenticated %}
         <h3>Leave a comment:</h3>
         <p>Posting as: {{ user.username }}</p>
-        <form id="commentForm" method="post"
-          style="margin-top: 1.3em;">
-          {{ comment_form }}
-          {% csrf_token %}
-          <button id="submitButton" type="submit"
-            class="btn btn-signup btn-lg">Submit</button>
+        <form id="commentForm" method="post" style="margin-top: 1.3em">
+          {{ comment_form }} {% csrf_token %}
+          <button id="submitButton" type="submit" class="btn btn-primary">
+            Submit
+          </button>
         </form>
         {% else %}
         <p>Log in to leave a comment</p>
