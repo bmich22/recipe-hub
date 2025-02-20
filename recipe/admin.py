@@ -10,34 +10,42 @@ admin.site.unregister(User)
 
 # Create a custom UserAdmin
 class UserAdmin(admin.ModelAdmin):
-    list_display = ("id", "username", "email", "is_staff")  # Add "id"
+    list_display = ("id", "username", "email", "is_staff")
 
 
 # Register the custom UserAdmin
 admin.site.register(User, UserAdmin)
 
+
 # Register RecipeAdmin
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
-    list_display = ('approved', 'title', 'slug', 'featured_image', 'status', 'author', 'created_on')
-    list_display_links = ('approved', 'title', 'slug')  # Fields that are clickable
-    prepopulated_fields = {'slug': ('title',)}  # Auto-fills slug from title
+    list_display = (
+        "approved",
+        "title",
+        "slug",
+        "featured_image",
+        "status",
+        "author",
+        "created_on",
+    )
+    list_display_links = ("approved", "title", "slug")  # Clickable fields
+    prepopulated_fields = {"slug": ("title",)}  # Auto-fills slug from title
 
 
 # Add bulk approve function to Comment section of Admin
-@admin.action(description='Approve selected comments')
+@admin.action(description="Approve selected comments")
 def approve_comments(modeladmin, request, queryset):
     updated = queryset.update(approved=True)
-    modeladmin.message_user(request, f'{updated} comment(s) successfully approved.')
+    modeladmin.message_user(request, f"{updated} comment(s) successfully \
+                            approved")
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('approved', 'body', 'recipe', 'author', 'created_on')
-    list_display_links = ('approved', 'body', 'recipe')  # Fields that are clickable
+    list_display = ("approved", "body", "recipe", "author", "created_on")
+    list_display_links = ("approved", "body", "recipe")  # Clickable fields
     actions = [approve_comments]
 
 
 # Register the Comment model
 admin.site.register(Comment, CommentAdmin)
-
-

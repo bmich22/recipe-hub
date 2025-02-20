@@ -1,13 +1,23 @@
-{% extends "base.html" %} {% load static %}
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 
 <body>
   <!-- Accessible Form -->
   <h2 id="edit-recipe-heading">Edit Recipe: {{ recipe.title }}</h2>
-  <form method="POST" enctype="multipart/form-data" role="form" aria-labelledby="edit-recipe-heading">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" aria-label="Save changes to recipe">Save Changes</button>
+  <form
+    method="POST"
+    enctype="multipart/form-data"
+    role="form"
+    aria-labelledby="edit-recipe-heading"
+  >
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit" aria-label="Save changes to recipe">
+      Save Changes
+    </button>
   </form>
-  <a href="{% url 'recipe:recipe_detail' recipe.slug %}" aria-label="Cancel and return to recipe">Cancel</a>
+  <a
+    href="{% url 'recipe:recipe_detail' recipe.slug %}"
+    aria-label="Cancel and return to recipe"
+    >Cancel</a
+  >
   {% endblock %}
+</body>

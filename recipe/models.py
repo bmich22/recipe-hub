@@ -15,7 +15,13 @@ def validate_not_empty(value):
 
 class Recipe(models.Model):
     title = models.CharField(max_length=50, unique=True, blank=False)
-    featured_image = CloudinaryField('image', folder="recipes/", format="jpg", unique_filename=False, default="placeholder")
+    featured_image = CloudinaryField(
+        "image",
+        folder="recipes/",
+        format="jpg",
+        unique_filename=False,
+        default="placeholder",
+    )
     description = models.TextField(blank=False, validators=[validate_not_empty])
     ingredients = models.TextField(blank=False, validators=[validate_not_empty])
     instructions = models.TextField(blank=False, validators=[validate_not_empty])
@@ -30,7 +36,7 @@ class Recipe(models.Model):
         ordering = ["-created_on"]
 
     def save(self, *args, **kwargs):
-        # Ensuring title uniqueness and generating a unique title if not provided
+        # Ensures title uniqueness
         if not self.title:
             base_title = "Recipe Title"
             counter = 1
@@ -39,21 +45,22 @@ class Recipe(models.Model):
                 counter += 1
                 new_title = f"{base_title} {counter}"
             self.title = new_title
-        
+
         # Generating the slug if not provided
         if not self.slug:
             self.slug = slugify(self.title)
-        
+
         super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
-    
-    
+
+
 class Comment(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="comments")
-    author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="commenter")
+    recipe = models.ForeignKey(
+        Recipe, on_delete=models.CASCADE, related_name="comments"
+    )
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="commenter")
     body = models.TextField()
     approved = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)

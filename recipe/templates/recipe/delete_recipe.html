@@ -1,11 +1,24 @@
 {% extends "base.html" %} {% block content %}
 <!-- Accessible Delete Confirmation -->
-<div role="alertdialog" aria-labelledby="delete-heading" aria-describedby="delete-description">
-  <h2 id="delete-heading">Are you sure you want to delete "{{ recipe.title }}"?</h2>
+<div
+  role="alertdialog"
+  aria-labelledby="delete-heading"
+  aria-describedby="delete-description"
+>
+  <h2 id="delete-heading">
+    Are you sure you want to delete "{{ recipe.title }}"?
+  </h2>
   <p id="delete-description">This action cannot be undone.</p>
   <form method="POST">
     {% csrf_token %}
-    <button type="submit" aria-label="Confirm recipe deletion">Yes, Delete</button>
+    <button type="submit" aria-label="Confirm recipe deletion">
+      Yes, Delete
+    </button>
   </form>
-  <a href="{% url 'recipe:recipe_detail' recipe.slug %}" aria-label="Cancel and return to recipe">Cancel</a>
+  <a
+    href="{% url 'recipe:recipe_detail' recipe.slug %}"
+    aria-label="Cancel and return to recipe"
+    >Cancel</a
+  >
   {% endblock %}
+</div>

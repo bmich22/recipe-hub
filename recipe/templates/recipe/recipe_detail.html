@@ -1,31 +1,49 @@
-{% extends 'base.html' %} {% load static %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <div class="container" role="region" aria-labelledby="recipe-title">
   <div class="d-md block col-lg-6">
     {% if "placeholder" in recipe.featured_image.url %}
-    <img class="img-fluid scale" src="{% static 'images/default.jpg' %}" style="max-width: 100%; height: auto"
-      alt="placeholder image" aria-describedby="recipe-title" />
+    <img
+      class="img-fluid scale"
+      src="{% static 'images/default.jpg' %}"
+      style="max-width: 100%; height: auto"
+      alt="placeholder image"
+      aria-describedby="recipe-title"
+    />
     {% else %}
-    <img class="img-fluid scale" src=" {{ recipe.featured_image.url }}" style="max-width: 100%; height: auto"
-      alt="featured image" aria-describedby="recipe-title" />
+    <img
+      class="img-fluid scale"
+      src=" {{ recipe.featured_image.url }}"
+      style="max-width: 100%; height: auto"
+      alt="featured image"
+      aria-describedby="recipe-title"
+    />
     {% endif %}
   </div>
   <h1 class="recipe-title fs-2">{{ recipe.title }}</h1>
   <p class="recipe-subtitle mb-0">
-    {{ recipe.author }} | {{ recipe.created_on }} | Servings: {{ recipe.servings }}
+    {{ recipe.author }} | {{ recipe.created_on }} | Servings: {{ recipe.servings
+    }}
   </p>
   {% if user == recipe.author %}
   <div class="d-flex mb-2">
-    <a href="{% url 'recipe:edit_recipe' recipe.slug %}" class="link me-3" aria-label="Edit {{ recipe.title }}">Edit
-      This
-      Recipe</a>
-    <a href="{% url 'recipe:delete_recipe' recipe.slug %}" class="link" aria-label="Delete {{ recipe.title }}">Delete
-      This
-      Recipe</a>
+    <a
+      href="{% url 'recipe:edit_recipe' recipe.slug %}"
+      class="link me-3"
+      aria-label="Edit {{ recipe.title }}"
+      >Edit This Recipe</a
+    >
+    <a
+      href="{% url 'recipe:delete_recipe' recipe.slug %}"
+      class="link"
+      aria-label="Delete {{ recipe.title }}"
+      >Delete This Recipe</a
+    >
     {% endif %}
     <!-- Show message to member if their recipe is not approved yet -->
     {% if not recipe.approved %}
-    <p class="approval fw-semibold ps-3" aria-live="polite"> This recipe is not yet approved.</p>
+    <p class="approval fw-semibold ps-3" aria-live="polite">
+      This recipe is not yet approved.
+    </p>
     {% endif %}
   </div>
 </div>
@@ -42,14 +60,21 @@
     </div>
   </div>
   <!-- Displaying Comments -->
-  <div class="row" role="region" aria-labelledby="comments-section" aria-live="polite">
+  <div
+    class="row"
+    role="region"
+    aria-labelledby="comments-section"
+    aria-live="polite"
+  >
     <div class="col-md-8 card mb-4 mt-3">
       <h3 class="fs-4">Comments:</h3>
       <div class="card-body">
         {% for comment in comments %}
         <div
           class="p-2 comments {% if not comment.approved and comment.author == user %} faded{% elif not comment.approved %} d-none{% endif %}"
-          role="article" aria-labelledby="comment{{ comment.id }}">
+          role="article"
+          aria-labelledby="comment{{ comment.id }}"
+        >
           <p class="font-weight-bold">
             {{ comment.author }}
             <span class="font-weight-normal"> {{ comment.created_on }} </span>
@@ -59,13 +84,24 @@
             {{ comment.body | linebreaks }}
           </div>
           {% if not comment.approved and comment.author == user %}
-          <p class="approval fst-italic" aria-live="assertive">This comment is awaiting approval.</p>
-          {% endif %}
-          {% if user.is_authenticated and comment.author == user %}
-          <button class="btn btn-delete btn-sm" comment_id="{{ comment.id }}"
-            aria-label="Delete comment from {{ comment.author }}">Delete</button>
-          <button class="btn btn-edit btn-sm" comment_id="{{ comment.id }}"
-            aria-label="Edit comment from {{ comment.author }}">Edit</button>
+          <p class="approval fst-italic" aria-live="assertive">
+            This comment is awaiting approval.
+          </p>
+          {% endif %} {% if user.is_authenticated and comment.author == user %}
+          <button
+            class="btn btn-delete btn-sm"
+            comment_id="{{ comment.id }}"
+            aria-label="Delete comment from {{ comment.author }}"
+          >
+            Delete
+          </button>
+          <button
+            class="btn btn-edit btn-sm"
+            comment_id="{{ comment.id }}"
+            aria-label="Edit comment from {{ comment.author }}"
+          >
+            Edit
+          </button>
           {% endif %}
         </div>
         {% endfor %}
@@ -77,9 +113,20 @@
         {% if user.is_authenticated %}
         <h3>Leave a comment:</h3>
         <p>Posting as: {{ user.username }}</p>
-        <form id="commentForm" method="post" style="margin-top: 1.3em" role="form" aria-labelledby="commentFormTitle">
+        <form
+          id="commentForm"
+          method="post"
+          style="margin-top: 1.3em"
+          role="form"
+          aria-labelledby="commentFormTitle"
+        >
           {{ comment_form }} {% csrf_token %}
-          <button id="submitButton" type="submit" class="btn btn-primary mt-2" aria-label="Submit comment">
+          <button
+            id="submitButton"
+            type="submit"
+            class="btn btn-primary mt-2"
+            aria-label="Submit comment"
+          >
             Submit
           </button>
         </form>
@@ -91,26 +138,37 @@
   </div>
 </div>
 <!-- Delete confirmation modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="deleteModal"
+  tabindex="-1"
+  aria-labelledby="deleteModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="deleteModalLabel">Delete comment?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
-        Are you sure you want to delete your comment?
-        This action cannot be undone.
+        Are you sure you want to delete your comment? This action cannot be
+        undone.
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel</button>
-        <a id="deleteConfirm" href="#" class="btn
-          btn-danger">Delete</a>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <a id="deleteConfirm" href="#" class="btn btn-danger">Delete</a>
       </div>
     </div>
   </div>
 </div>
-{% endblock content %}
-{% block extras %}
+{% endblock content %} {% block extras %}
 <script src="{% static 'js/comments.js' %}"></script>
 {% endblock %}

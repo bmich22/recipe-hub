@@ -9,10 +9,10 @@ from .forms import CommentForm
 
 
 class RecipeList(generic.ListView):
-    queryset = Recipe.objects.filter(status=1, approved=True).order_by('-created_on')
+    queryset = Recipe.objects.filter(status=1, approved=True).order_by("-created_on")
     template_name = "recipe/index.html"
     paginate_by = 4
-    
+
 
 def recipe_detail(request, slug):
     """
@@ -30,24 +30,23 @@ def recipe_detail(request, slug):
             comment.recipe = recipe
             comment.save()
             messages.add_message(
-                request, messages.SUCCESS,
-                'Comment submitted and awaiting approval.'
+                request, messages.SUCCESS, "Comment submitted and awaiting approval."
             )
 
     comment_form = CommentForm()
 
     return render(
-        request, 
-        "recipe/recipe_detail.html", 
+        request,
+        "recipe/recipe_detail.html",
         {
-            "recipe": recipe, 
-            "comments": comments, 
+            "recipe": recipe,
+            "comments": comments,
             "comment_count": comment_count,
             "comment_form": comment_form,
         },
     )
 
-        
+
 def add_recipe(request):
     if request.method == "POST":
         form = RecipeForm(request.POST, request.FILES)
@@ -56,28 +55,36 @@ def add_recipe(request):
             recipe.author = request.user  # Assign the logged-in user
             recipe.save()  # Now save it
             messages.add_message(
-                request, messages.SUCCESS,
-                'Success! You recipe has been submitted and is awaiting approval')
+                request,
+                messages.SUCCESS,
+                "Success! You recipe has been submitted and is awaiting approval",
+            )
             return redirect("recipe:list")  # Redirect to the recipe list page
 
     else:
         form = RecipeForm()
 
-    return render(request, "recipe/add_recipe.html", {
-        "form": form,
-    })
+    return render(
+        request,
+        "recipe/add_recipe.html",
+        {
+            "form": form,
+        },
+    )
 
 
 @login_required
 def member_recipes(request):
-    member_list = Recipe.objects.filter(author=request.user)  # Get recipes for logged-in user
+    member_list = Recipe.objects.filter(
+        author=request.user
+    )  # Get recipes for logged-in user
     return render(request, "recipe/member_recipes.html", {"member_list": member_list})
 
 
 @login_required
 def edit_recipe(request, slug):
     recipe = get_object_or_404(Recipe, slug=slug)
-    
+
     # Ensure that the logged in user is the owner of the recipe
     if request.user != recipe.author:
         messages.error(request, "You are not authorized to edit this recipe.")
@@ -86,14 +93,17 @@ def edit_recipe(request, slug):
 
     if request.method == "POST":
         form = RecipeForm(request.POST, request.FILES, instance=recipe)
-        if form.is_valid():	
+        if form.is_valid():
             form.save()
             messages.success(request, "Recipe updated successfully")
             return redirect("recipe:recipe_detail", recipe.slug)
             # return redirect("recipe:recipe_detail", slug=recipe.slug)
     else:
         form = RecipeForm(instance=recipe)
-        return render(request, "recipe/edit_recipe.html", {"form": form, "recipe": recipe})
+        return render(
+            request, "recipe/edit_recipe.html", {"form": form, "recipe": recipe}
+        )
+
 
 @login_required
 def delete_recipe(request, slug):
@@ -113,15 +123,17 @@ def delete_recipe(request, slug):
 
 
 def recipe_search(request):
-    query = request.GET.get('query', '')  # Get the search query from the URL parameter
+    query = request.GET.get("query", "")  # Get the search query from the URL parameter
     recipes = Recipe.objects.filter(status=1)
 
     if query:
-        recipes = recipes.filter(ingredients__icontains=query)  # Filter recipes by the query
-    return render(request, 'recipe/recipe_search.html', {
-        'query': query,
-        'recipes': recipes
-    })
+        recipes = recipes.filter(
+            ingredients__icontains=query
+        )  # Filter recipes by the query
+    return render(
+        request, "recipe/recipe_search.html", {"query": query, "recipes": recipes}
+    )
+
 
 def comment_edit(request, slug, comment_id):
     """
@@ -139,11 +151,13 @@ def comment_edit(request, slug, comment_id):
             comment.post = post
             comment.approved = False
             comment.save()
-            messages.add_message(request, messages.SUCCESS, 'Comment updated and waiting approval.')
+            messages.add_message(
+                request, messages.SUCCESS, "Comment updated and waiting approval."
+            )
         else:
-            messages.add_message(request, messages.ERROR, 'Error updating comment!')
+            messages.add_message(request, messages.ERROR, "Error updating comment!")
 
-    return HttpResponseRedirect(reverse('recipe:recipe_detail', args=[slug]))
+    return HttpResponseRedirect(reverse("recipe:recipe_detail", args=[slug]))
 
 
 def comment_delete(request, slug, comment_id):
@@ -156,8 +170,10 @@ def comment_delete(request, slug, comment_id):
 
     if comment.author == request.user:
         comment.delete()
-        messages.add_message(request, messages.SUCCESS, 'Comment deleted!')
+        messages.add_message(request, messages.SUCCESS, "Comment deleted!")
     else:
-        messages.add_message(request, messages.ERROR, 'You can only delete your own comments!')
+        messages.add_message(
+            request, messages.ERROR, "You can only delete your own comments!"
+        )
 
-    return HttpResponseRedirect(reverse('recipe:recipe_detail', args=[slug]))
+    return HttpResponseRedirect(reverse("recipe:recipe_detail", args=[slug]))

@@ -1,22 +1,20 @@
 {% extends "base.html" %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>the recipe hub registration page</title>
-</head>
-<body>
+  <body>
     <h1 id="register-heading">the recipe hub registration page</h1>
     {% block content %}
     <div class="start-pages">
-        <p class="fs-4">Register here to join our community.</p>
-        <form action="/member/register/" method="post" role="form" aria-labelledby="register-heading">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn btn-primary" aria-label="Submit Registration Form">Submit</button>
-        </form>
+      <p class="fs-4">Register here to join our community.</p>
+      <form
+        action="/member/register/"
+        method="post"
+        role="form"
+        aria-labelledby="register-heading"
+      >
+        {% csrf_token %} {{ form.as_p }}
+        <button class="btn btn-primary" aria-label="Submit Registration Form">
+          Submit
+        </button>
+      </form>
     </div>
     {% endblock %}
-</body>
-</html>
+  </body>
