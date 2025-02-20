@@ -8,6 +8,7 @@
         class="img-fluid scale"
         style="max-width: 100%; height: auto"
         alt="placeholder image"
+        aria-labelledby="about-image-description"
       />
       {% else %}
       <img
@@ -15,15 +16,18 @@
         class="img-fluid scale"
         style="max-width: 100%; height: auto"
         alt="placeholder image"
+        aria-labelledby="about-image-description"
       />
       {% endif %}
       <!-- <img src="{% static 'images/nobody.jpg' %}" width="75%" /> -->
     </div>
     <div class="col-8">
       <!-- Title goes between these h2 tags -->
-      <h2>{{ about.title }}</h2>
+      <h2 id="about-title">{{ about.title }}</h2>
       <!-- Content goes directly underneath this -->
-      {{ about.content | safe }}
+      <div id="about-content" aria-describedby="about-title">
+        {{ about.content | safe }}
+      </div>
     </div>
   </div>
   <div class="row">

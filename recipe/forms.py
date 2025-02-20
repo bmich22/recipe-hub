@@ -1,5 +1,5 @@
 from django import forms
-from .models import Recipe
+from .models import Recipe, STATUS
 from .models import Comment
 
 
@@ -19,6 +19,12 @@ class RecipeForm(forms.ModelForm):
     
     instructions = forms.CharField(
         widget=forms.Textarea(attrs={'placeholder': 'Provide detailed instructions for your recipe'})
+    )
+
+    status = forms.ChoiceField(
+        choices=STATUS,  # Use the STATUS choices from the model
+        widget=forms.Select(attrs={'class': 'form-select', 'style': 'width: 100px; border-radius: 0px; border-color: black; line-height: 1.0rem;'}),
+        label="Status: Choose 'Draft' to save your recipe so you can finish it later or 'Published' to show it is ready for approval."
     )
 
     class Meta:

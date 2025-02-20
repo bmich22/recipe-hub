@@ -1,11 +1,11 @@
 {% extends "base.html" %} {% load static %}
 {% block content %}
-<h1 class="fs-3">Search Results for: "{{ query }}"</h1>
-
+<h1 id="search-heading" class="fs-3">Search Results for: "{{ query }}"</h1>
 <div class="container">
   <div class="row">
     <div class="col-12 mt-2">
-      <div class="row">
+      <!-- Accessible Recipes Section -->
+      <div class="row" role="region" aria-labelledby="recipes-heading">
         {% for recipe in recipes %}
         <div class="col-lg-3 col-md-6">
           <div class="card mb-4">
@@ -18,12 +18,14 @@
             {% endif %}
             <div class="card-body pt-2">
               <div class="title-container mb-2" style="height:64px">
-              <h2 class="card-title fs-5">{{ recipe.title }}</h2>
+                <h2 class="card-title fs-5">{{ recipe.title }}</h2>
               </div>
               <p class="author">Author: {{ recipe.author }}</p>
               <hr />
               <p class="card-text text-muted h6">{{ recipe.created_on}}</p>
-              <a href="{% url 'recipe:recipe_detail' recipe.slug %}" class="stretched-link"></a>
+              <!-- Accessible Link to Recipe Details -->
+              <a href="{% url 'recipe:recipe_detail' recipe.slug %}" class="stretched-link"
+                aria-label="View details for {{ recipe.title }}"></a>
             </div>
           </div>
         </div>

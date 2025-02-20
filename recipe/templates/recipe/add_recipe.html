@@ -1,16 +1,16 @@
-{% extends "base.html" %} {% load static %}
+{% extends "base.html" %}{% load static %}
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Add Recipe</title>
-  </head>
-  {% block content %}
-  <body>
-    <h2>Add a New Recipe</h2>
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %} {{ form.as_p }}
-      <button type="submit">Save Recipe</button>
-    </form>
-  </body>
-</html>
-{% endblock %}
+<html lang="en">
+<head>
+<title>Add Recipe</title>
+</head>
+{% block content %}
+<body>
+  <h2 id="form-heading">Add a New Recipe</h2>
+  <form method="POST" enctype="multipart/form-data" role="form" aria-labelledby="form-heading">
+    {% csrf_token %} {{ form.as_p }}
+    <!-- Accessible Submit Button -->
+    <button type="submit" class="btn btn-primary" aria-label="Save and submit new recipe">Save Recipe</button>
+  </form>
+</body>
+</html>{% endblock %}

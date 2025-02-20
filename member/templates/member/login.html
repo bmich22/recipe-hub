@@ -8,19 +8,18 @@
     <title>the recipe hub login</title>
   </head>
   <body>
-    <h1>the recipe hub login</h1>
+    <h1 id="login-heading">the recipe hub login</h1>
     {% block content %}
     <div class="login_page">
       <p class="fs-4">Log in here to share recipes on our site.</p>
-      <form action="/member/login/" method="post">
+      <form action="/member/login/" method="post" role="form" aria-labelledby="login-heading">
         {% csrf_token %} {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary" aria-label="Submit login form">Login</button>
       </form>
       <h6>
         Don't have an account? Join us, we'd love to share recipes with you.
-        <a class="btn btn-primary" href="{% url 'member:register' %}"
-          >Sign Up</a
-        >
+        <a class="btn btn-primary" href="{% url 'member:register' %}" aria-label="Sign up for a new account">
+          Sign Up</a>
       </h6>
       {% endblock %}
     </div>

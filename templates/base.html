@@ -32,7 +32,7 @@
 <div class="container">
   <body class="d-flex flex-column min-vh-100">
     <!--  Navigation -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" role="navigation" aria-label="Main navigation">
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'recipe:list' %}">the recipe hub</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -54,25 +54,25 @@
             {% if user.is_authenticated %}
             <form action="{% url 'member:member_logout' %}" method="post" class="me-3">
               {% csrf_token %}
-              <button type="submit" class="logout">logout</button>
+              <button type="submit" class="logout" aria-label="Logout">logout</button>
             </form>
             {% else %}
-            <a class="link me-3" href="{% url 'member:member_login' %}">login/register</a>
+            <a class="link me-3" href="{% url 'member:member_login' %}" aria-label="Login or Register">login/register</a>
             {% endif %}
             <form class="d-flex" role="search" method="GET" action="{% url 'recipe:recipe_search' %}">
-              <input class="form-control me-2" type="search" name="query" placeholder="search" aria-label="Search">
-              <button class="btn btn-primary" type="submit">search</button>
+              <input class="form-control me-2" type="search" name="query" placeholder="search" aria-label="Search for recipes">
+              <button class="btn btn-primary" type="submit" aria-label="Submit search">search</button>
             </form>
           </div>
         </div>
       </div>
     </nav>
     <!-- Custom content to user including messages after creating, editing or commenting recipes -->
-    <section class="custom-content container py-3">
+    <section class="custom-content container py-3" role="region" aria-labelledby="user-messages">
       {% if user.is_authenticated %}
         <!-- if recipe has just been submitted display confirmation message else welcome back member -->
         {% if messages %}
-          <div class="messages">
+          <div class="messages" aria-live="polite">
             {% for message in messages %}
               <div class="welcom alert">
                 <div class="fw-bold alert-{{ message.tags }}">{{ message }}</div>
@@ -85,13 +85,13 @@
         <!-- Display create recipe and manage recipes for members -->
         {% if request.user.is_superuser %}
           <div class="d-grid gap-2 d-md-block">
-            <a class="btn btn-primary btn-sm" href=" /add_recipe/">Create a Recipe</a>
-            <a class="btn btn-primary btn-sm" href=" /member_recipes/">Manage My Recipes</a>
-            <a class="btn btn-primary btn-sm" href=" /admin/">Admin Panel</a>
+            <a class="btn btn-primary btn-sm" href=" /add_recipe/" aria-label="Create a Recipe">Create a Recipe</a>
+            <a class="btn btn-primary btn-sm" href=" /member_recipes/" aria-label="Manage My Recipes">Manage My Recipes</a>
+            <a class="btn btn-primary btn-sm" href=" /admin/" aria-label="Admin Panel">Admin Panel</a>
           </div>
         {% else %}
-          <p><a class="btn btn-primary btn-sm" href=" /add_recipe/">Create a Recipe</a>
-          <a class="btn btn-primary btn-sm" href=" /member_recipes/">Manage My Recipes</a>
+          <p><a class="btn btn-primary btn-sm" href=" /add_recipe/" aria-label="Create a Recipe">Create a Recipe</a>
+          <a class="btn btn-primary btn-sm" href=" /member_recipes/" aria-label="Manage My Recipes">Manage My Recipes</a>
           </p>
         {% endif %}
           </div>
@@ -102,7 +102,7 @@
         {% endif %}
     </section>
 
-    <main class="flex-grow-1 container py-4">
+    <main class="flex-grow-1 container py-4" role="main">
       {% block content %}
       <p></p>
       {% endblock content %}
@@ -113,11 +113,11 @@
 </body>
 </div>
 <!-- Footer -->
-<footer class="bg-dark text-light mt-auto text-center py-3">
+<footer class="bg-dark text-light mt-auto text-center py-3" role="contentinfo">
   <p class="m-0 text-center text-white"><i class="fa-regular fa-copyright fa-xs"></i> the recipe hub | Follow us:
-    <i class="fa-brands fa-facebook ms-3" href=""></i>
-    <i class="fa-brands fa-square-instagram ms-3" href=""></i>
-    <i class="fab fa-youtube-square ms-3" href=""></i>
+    <i class="fa-brands fa-facebook ms-3" href="" aria-label="Follow us on Facebook"></i>
+    <i class="fa-brands fa-square-instagram ms-3" href="" aria-label="Follow us on Instagram"></i>
+    <i class="fab fa-youtube-square ms-3" href="" aria-label="Follow us on YouTube"></i>
   </p>
 </footer>
 

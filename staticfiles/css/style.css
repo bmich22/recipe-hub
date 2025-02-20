@@ -73,8 +73,8 @@ input#id_servings {
     padding-bottom: 2%;
 }
 
-input {
-    border-radius: 5px;
+input#id_title {
+    width: 40%;
 }
 
 .approval {

@@ -73,8 +73,8 @@ input#id_servings {
     padding-bottom: 2%;
 }
 
-input {
-    border-radius: 5px;
+input#id_title {
+    width: 40%;
 }
 
 .approval {
@@ -85,4 +85,9 @@ input {
     font-weight: 500;
     font-style: italic;
     color: #842b2f;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none; /* Removes the gray outline */
+    box-shadow: none; /* Removes any additional shadow */
 }
