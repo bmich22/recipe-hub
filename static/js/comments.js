@@ -9,7 +9,7 @@ const deleteConfirm = document.getElementById("deleteConfirm");
 
 /**
 * Initializes edit functionality for the provided edit buttons.
-* 
+*
 * For each button in the `editButtons` collection:
 * - Retrieves the associated comment's ID upon click.
 * - Fetches the content of the corresponding comment.
