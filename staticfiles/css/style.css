@@ -86,3 +86,8 @@ input#id_title {
     font-style: italic;
     color: #842b2f;
 }
+
+input:focus, select:focus, textarea:focus {
+    outline: none; /* Removes the gray outline */
+    box-shadow: none; /* Removes any additional shadow */
+}
